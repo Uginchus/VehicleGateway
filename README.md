@@ -42,7 +42,7 @@ sudo ufw disable
 
 Because the `ros_gz` bridge that ships with ROS 2 Humble targets the previous version of Gazebo (Fortress), we will remove it and build our own version of the ROS-Gazebo link packages in the next section. To avoid some warning about having multiple versions of those packages, you can remove them from your ROS 2 Humble installation:
 ```bash
-sudo apt remove ros-humble-ros-gz-bridge
+sudo apt remove ros-jazzy-ros-gz-bridge
 ```
 
 ### Install Rust
@@ -58,14 +58,17 @@ We can now build the Vehicle Gateway itself. To keep paths short, we will make a
 At time of writing, the `rosdep` command has to include a lot of `--skip-key` because currently Gazebo Garden is not yet in `rosdep`.
 
 ```bash
-sudo apt install python3-kconfiglib python3-jinja2 python3-jsonschema ros-humble-gps-msgs gcc-arm-none-eabi libfuse2 python3-pip git python3-vcstool python3-future rsync
-pip3 install pyros-genmsg
+sudo apt install python3-kconfiglib python3-jinja2 python3-jsonschema ros-jazzy-gps-msgs gcc-arm-none-eabi libfuse2t64 python3-pip git python3-vcstool python3-future rsync -y
+
+pip install pyros-genmsg pyyaml jinja2 typeguard
+
 mkdir -p ~/vg/src
 cd ~/vg/src
-git clone https://github.com/osrf/vehicle_gateway
+git clone https://github.com/Uginchus/VehicleGateway.git
 cd ~/vg
-vcs import src < src/vehicle_gateway/dependencies.repos
-source /opt/ros/humble/setup.bash
+
+vcs import src < src/VehicleGateway/dependencies.repos
+source /opt/ros/jazzy/setup.bash
 rosdep update && rosdep install --from-paths src --ignore-src -y --skip-keys="gz-transport12 gz-common5 gz-math7 gz-msgs9 gz-gui7 gz-cmake3 gz-sim7 zenohc gz-transport7 gz-plugin2"
 sudo apt install python3-colcon-common-extensions
 colcon build --event-handlers console_direct+

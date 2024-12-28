@@ -6,15 +6,15 @@ repositories:
   uros/micro_ros_msgs:
     type: git
     url: https://github.com/micro-ROS/micro_ros_msgs.git
-    version: humble
+    version: jazzy
   uros/micro-ROS-Agent:
     type: git
     url: https://github.com/micro-ROS/micro-ROS-Agent.git
-    version: humble
+    version: jazzy
   px4_msgs:
     type: git
     url: https://github.com/PX4/px4_msgs
-    version: "release/1.14"
+    version: "main"
   msp:
     type: git
     url: https://github.com/christianrauch/msp
