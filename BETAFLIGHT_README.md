@@ -1,3 +1,12 @@
+# How to run betaflight
+
+Launch 
+```
+cd ~/vg/install/betaflight_sim/share/betaflight_sim/bin
+./betaflight_SITL.elf
+```
+
+
 # Betaflight
 
 The Gazebo support for Betaflight was added in this [PR](https://github.com/betaflight/betaflight/pull/12346).

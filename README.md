@@ -1,8 +1,43 @@
+# Install packages
+
+```bash
+colcon build --packages-select ros_gz_interfaces --symlink-install
+colcon build --packages-select ros_gz_bridge --symlink-install
+colcon build --packages-select ros_gz_image --symlink-install
+colcon build --packages-select ros_gz_sim --symlink-install
+```
+
+```bash
+colcon build --packages-select betaflight_configurator --symlink-install
+colcon build --packages-select betaflight_controller --symlink-install
+colcon build --packages-select betaflight_gazebo --symlink-install
+colcon build --packages-select betaflight_sim --symlink-install
+```
+
+```bash
+colcon build --packages-select gz_aerial_plugins --symlink-install
+```
+
+```bash
+colcon build --packages-select my_robot_description --symlink-install
+colcon build --packages-select my_robot_bringup --symlink-install
+```
+
+```bash
+wget https://developer.arm.com/-/media/Files/downloads/gnu-rm/10.3-2021.10/gcc-arm-none-eabi-10.3-2021.10-x86_64-linux.tar.bz2
+tar -xjf gcc-arm-none-eabi-10.3-2021.10-x86_64-linux.tar.bz2
+sudo mv gcc-arm-none-eabi-10.3-2021.10 /opt/
+export PATH=/opt/gcc-arm-none-eabi-10.3-2021.10/bin:$PATH
+arm-none-eabi-gcc --version
+echo 'export PATH=/opt/gcc-arm-none-eabi-10.3-2021.10/bin:$PATH' >> ~/.bashrc
+source ~/.bashrc
+```
+
 # Vehicle Gateway
 
 The goal of this project is to create a pluginlib-based C++ library that can interface with several vehicle SDK's.
 
- - betaflight_controller: This package download and install [Betaflight Configurator](https://github.com/betaflight/betaflight-configurator) which is a crossplatform configuration tool for the Betaflight flight control system.
+ - betaflight_configurator: This package download and install [Betaflight Configurator](https://github.com/betaflight/betaflight-configurator) which is a crossplatform configuration tool for the Betaflight flight control system.
  - betaflight_controller: This ROS 2 package sends RC values to Betaflight through a UDP connection
  - betaflight_gazebo: This Gazebo plugin sends the state data to the Betaflight SITL and it receives the data from the motors.
  - betaflight_sim: Download and install the betaflight SITL flight controller.

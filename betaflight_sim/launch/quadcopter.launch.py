@@ -28,6 +28,8 @@ import time
 def get_betaflight_dir():
     return get_package_share_directory('betaflight_sim')
 
+def get_world_dir():
+    return get_package_share_directory('my_robot_bringup')
 
 run_virtual_tty = ExecuteProcess(cmd=["socat", "-dd", "pty,link=/tmp/ttyS0,raw,echo=0",
                                       "tcp:127.0.0.1:5761"])
@@ -57,7 +59,7 @@ def generate_launch_description():
     os.environ["GZ_SIM_RESOURCE_PATH"] = os.path.join(get_betaflight_dir(), "models")
     os.environ["GZ_SIM_RESOURCE_PATH"] += ":" + os.path.join(get_betaflight_dir(), "worlds")
 
-    world_sdf = os.path.join(get_betaflight_dir(), "worlds", "empty_betaflight_world.sdf")
+    world_sdf = os.path.join(get_world_dir(), "worlds", "sandbox.sdf")
 
     use_groundcontrol = DeclareLaunchArgument('groundcontrol', default_value='false',
                                               choices=['true', 'false'],
