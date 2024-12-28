@@ -31,7 +31,7 @@ cd ~/vg/vg_ws
 vcs import src < src/vehicle_gateway/dependencies.repos
 ```
 
-Next, install Gazebo Garden. The full instructions are [here](https://gazebosim.org/docs/garden/install_ubuntu), and summarized as follows.
+Next, install Gazebo Garden. The full instructions are [here](https://gazebosim.org/docs/harmonic/install_ubuntu), and summarized as follows.
 
 ```bash
 sudo apt-get update
@@ -41,8 +41,8 @@ echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/pkgs-
 sudo apt-get update
 mkdir -p ~/vg/gz_ws/src
 cd ~/vg/gz_ws
-wget https://raw.githubusercontent.com/gazebo-tooling/gazebodistro/master/collection-garden.yaml
-vcs import src < ../vg_ws/src/vehicle_gateway/collection-garden.yaml
+wget https://raw.githubusercontent.com/gazebo-tooling/gazebodistro/master/collection-harmonic.yaml
+vcs import src < ../vg_ws/src/vehicle_gateway/collection-harmonic.yaml
 sudo apt install -y $(sort -u $(find . -iname 'packages-'`lsb_release -cs`'.apt' -o -iname 'packages.apt' | grep -v '/\.git/') | sed '/gz\|sdf/d' | tr '\n' ' ')
 ```
 

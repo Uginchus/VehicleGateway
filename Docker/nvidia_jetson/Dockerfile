@@ -45,7 +45,7 @@ RUN \
 		--from-paths src \
 		--ignore-src \
 		-y \
-		--skip-keys="gz-transport12 gz-common5 gz-math7 gz-msgs9 gz-gui7 gz-cmake3 gz-sim7 zenohc xacro sdformat_urdf image_transport_plugins control_toolbox gps_msgs aruco_opencv_msgs aruco_opencv joy rviz2 rqt_topic rqt_plot rqt_image_view"
+		--skip-keys="gz-transport13 gz-common5 gz-math7 gz-msgs10 gz-gui7 gz-cmake3 gz-sim8 zenohc xacro sdformat_urdf image_transport_plugins control_toolbox gps_msgs aruco_opencv_msgs aruco_opencv joy rviz2 rqt_topic rqt_plot rqt_image_view"
 
 # Build workspace
 #

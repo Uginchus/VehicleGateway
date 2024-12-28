@@ -37,6 +37,9 @@
 
 #include <gz/sim/Util.hh>
 
+#include <gz/msgs/imu_sensor.pb.h>
+#include <gz/msgs/vector3d.pb.h>
+
 #include "betaflight_gazebo/BetaflightSocket.hpp"
 
 
@@ -311,7 +314,7 @@ public:
   /// \brief A copy of the most recently received IMU data message
 
 public:
-  gz::msgs::IMU imuMsg;
+  gz::msgs::IMUSensor imuMsg;
 
   /// \brief Have we received at least one IMU data message?
 
@@ -327,22 +330,24 @@ public:
   ///        IMU data message for later use.
 
 public:
-  void ImuCb(const gz::msgs::IMU & _msg)
+  void ImuCb(const gz::msgs::IMUSensor & _msg)
   {
     std::lock_guard<std::mutex> lock(this->imuMsgMutex);
     imuMsg = _msg;
     imuMsgValid = true;
   }
 
+
   float pressure = 101325;    // pressure in Pa (0m MSL);
   std::mutex airPressureMsgMutex;
 
-  void onAirPressureMessageReceived(const gz::msgs::FluidPressure & _msg)
+  void onAirPressureMessageReceived(
+    const gz::msgs::AirPressureSensor & /*_msg*/)
   {
     std::lock_guard<std::mutex> lock(this->airPressureMsgMutex);
-    this->pressure = _msg.pressure();
+    // [TODO] Need to update the pressure value
+    // this->pressure = _msg.PrintDebugString();
   }
-
   /// \brief keep track of controller update sim-time.
 
 public:
@@ -389,8 +394,8 @@ betaflight_gazebo::BetaFlightPlugin::~BetaFlightPlugin()
 
 /////////////////////////////////////////////////
 void betaflight_gazebo::BetaFlightPlugin::Reset(
-  const gz::sim::UpdateInfo & _info,
-  gz::sim::EntityComponentManager & _ecm)
+  const gz::sim::UpdateInfo & /*_info*/,
+  gz::sim::EntityComponentManager & /*_ecm*/)
 {
   // if (!_ecm.EntityHasComponentType(this->dataPtr->imuLink,
   //     gz::sim::components::WorldPose::typeId))
@@ -1183,7 +1188,7 @@ void betaflight_gazebo::BetaFlightPlugin::SendState(
 
   // Make a local copy of the latest IMU data (it's filled in
   // on receipt by ImuCb()).
-  gz::msgs::IMU imuMsg;
+  gz::msgs::IMUSensor imuMsg;
   {
     std::lock_guard<std::mutex> lock(this->dataPtr->imuMsgMutex);
     // Wait until we've received a valid message.
@@ -1205,16 +1210,16 @@ void betaflight_gazebo::BetaFlightPlugin::SendState(
 
   // get linear acceleration
   gz::math::Vector3d linearAccel{
-    imuMsg.linear_acceleration().x(),
-    imuMsg.linear_acceleration().y(),
-    imuMsg.linear_acceleration().z()
+    imuMsg.linear_acceleration().x_noise().mean(),
+    imuMsg.linear_acceleration().y_noise().mean(),
+    imuMsg.linear_acceleration().z_noise().mean()
   };
 
   // get angular velocity
   gz::math::Vector3d angularVel{
-    imuMsg.angular_velocity().x(),
-    imuMsg.angular_velocity().y(),
-    imuMsg.angular_velocity().z(),
+    imuMsg.angular_velocity().x_noise().mean(),
+    imuMsg.angular_velocity().y_noise().mean(),
+    imuMsg.angular_velocity().z_noise().mean()
   };
 
   // copy to pkt
@@ -1260,11 +1265,11 @@ void betaflight_gazebo::BetaFlightPlugin::SendState(
   //   from: model XYZ
   //   to: airplane x-forward, y-left, z-down
   const gz::math::Pose3d gazeboXYZToModelXForwardZDown =
-    this->dataPtr->modelXYZToAirplaneXForwardZDown + worldPose->Data();
+    this->dataPtr->modelXYZToAirplaneXForwardZDown * worldPose->Data();
 
   // get transform from world NEED to Model frame
   const gz::math::Pose3d NEDToModelXForwardZUp =
-    gazeboXYZToModelXForwardZDown - this->dataPtr->gazeboXYZToNED;
+    gazeboXYZToModelXForwardZDown * this->dataPtr->gazeboXYZToNED.Inverse();
 
   // gzerr << "need to model [" << NEDToModelXForwardZUp << "]\n";
 

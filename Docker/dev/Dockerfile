@@ -24,7 +24,7 @@ RUN apt-get update \
 RUN wget https://packages.osrfoundation.org/gazebo.gpg -O /usr/share/keyrings/pkgs-osrf-archive-keyring.gpg && \
     echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/pkgs-osrf-archive-keyring.gpg] http://packages.osrfoundation.org/gazebo/ubuntu-stable $(lsb_release -cs) main" | tee /etc/apt/sources.list.d/gazebo-stable.list > /dev/null && \
     apt-get update && \
-    apt-get install -y -qq gz-garden \
+    apt-get install -y -qq gz-harmonic \
     && apt-get clean
 
 RUN pip3 install vcstool pyros-genmsg
@@ -45,7 +45,7 @@ RUN apt-get update && apt-get upgrade -q -y && \
 RUN rosdep init && \
   rosdep update && \
   cd /home/vehicle_gateway && \
-  rosdep install --from-paths ./ -i -y --rosdistro humble --ignore-src --skip-keys="gz-transport12 gz-common5 gz-math7 gz-msgs9 gz-gui7 gz-cmake3 gz-sim7 zenohc gz-transport7 gz-plugin2"
+  rosdep install --from-paths ./ -i -y --rosdistro humble --ignore-src --skip-keys="gz-transport13 gz-common5 gz-math7 gz-msgs10 gz-gui7 gz-cmake3 gz-sim8 zenohc gz-transport7 gz-plugin2"
 
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y && \
     echo 'export PATH="$HOME/.cargo/bin:$PATH"' >> $HOME/.profile

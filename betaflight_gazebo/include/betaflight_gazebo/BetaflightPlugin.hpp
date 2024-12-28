@@ -40,24 +40,20 @@ class GZ_SIM_VISIBLE BetaFlightPlugin
   public gz::sim::ISystemPreUpdate,
   public gz::sim::ISystemReset
 {
-  /// \brief Constructor.
-
+  
 public:
+
+  /// \brief Constructor.
   BetaFlightPlugin();
 
   /// \brief Destructor.
-
-public:
   ~BetaFlightPlugin();
 
-public:
   void Reset(
     const gz::sim::UpdateInfo & _info,
     gz::sim::EntityComponentManager & _ecm) final;
 
   /// \brief Load configuration from SDF on startup.
-
-public:
   void Configure(
     const gz::sim::Entity & _entity,
     const std::shared_ptr<const sdf::Element> & _sdf,
@@ -66,73 +62,53 @@ public:
 
   /// \brief Do the part of one update loop that involves making
   ///        changes to simulation.
-
-public:
   void PreUpdate(
     const gz::sim::UpdateInfo & _info,
     gz::sim::EntityComponentManager & _ecm) final;
 
   /// \brief Do the part of one update loop that involves
   ///        reading results from simulation.
-
-public:
   void PostUpdate(
     const gz::sim::UpdateInfo & _info,
     const gz::sim::EntityComponentManager & _ecm) final;
 
-  /// \brief Load control channels
-
 private:
+
+  /// \brief Load control channels
   void LoadControlChannels(
     sdf::ElementPtr _sdf,
     gz::sim::EntityComponentManager & _ecm);
 
   /// \brief Load IMU sensors
-
-private:
   void LoadImuSensors(
     sdf::ElementPtr _sdf,
     gz::sim::EntityComponentManager & _ecm);
 
   /// \brief Update the control surfaces controllers.
   /// \param[in] _info Update information provided by the server.
-
-private:
   void OnUpdate();
 
   /// \brief Update PID Joint controllers.
   /// \param[in] _dt time step size since last update.
-
-private:
   void ApplyMotorForces(
     const double _dt,
     gz::sim::EntityComponentManager & _ecm);
 
   /// \brief Reset PID Joint controllers.
-
-private:
   void ResetPIDs();
 
   /// \brief Receive a servo packet from ArduPilot
   ///
   /// Returns true if a servo packet was received, otherwise false.
-
-private:
   bool ReceiveServoPacket(double _simTime, const gz::sim::EntityComponentManager & _ecm);
 
   /// \brief Send state to ArduPilot
-
-private:
   void SendState(double _simTime, const gz::sim::EntityComponentManager & _ecm) const;
 
   /// \brief Initialise flight dynamics model socket
-
-private:
   bool InitSockets(sdf::ElementPtr _sdf) const;
 
   /// \brief Private data pointer.
-
-private:
   std::unique_ptr<BetaFlightPluginPrivate> dataPtr;
 };
 

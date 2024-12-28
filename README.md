@@ -24,7 +24,7 @@ This package is developed and on Ubuntu 22.04 LTS with ROS 2 Humble, and uses Ga
 First, install ROS 2 Humble using the `.deb` packages using APT [according to these instructions](http://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debians.html)
 
 ### Binary Gazebo Installation
-Next, install Gazebo Garden. The full instructions are [here](https://gazebosim.org/docs/garden/install_ubuntu), and summarized as follows:
+Next, install Gazebo Garden. The full instructions are [here](https://gazebosim.org/docs/harmonic/install_ubuntu), and summarized as follows:
 
 ```bash
 sudo apt-get update
@@ -32,7 +32,7 @@ sudo apt-get install lsb-release wget gnupg
 sudo wget https://packages.osrfoundation.org/gazebo.gpg -O /usr/share/keyrings/pkgs-osrf-archive-keyring.gpg
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/pkgs-osrf-archive-keyring.gpg] http://packages.osrfoundation.org/gazebo/ubuntu-stable $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/gazebo-stable.list > /dev/null
 sudo apt-get update
-sudo apt-get install gz-garden
+sudo apt-get install gz-harmonic
 ```
 
 Note that Gazebo uses multicast sockets to communicate between its components, and depending on your firewall configuration, these may be blocked and prevent Gazebo from starting. If Gazebo does not start, or if it only shows an empty black window, try this:
@@ -69,7 +69,7 @@ cd ~/vg
 
 vcs import src < src/VehicleGateway/dependencies.repos
 source /opt/ros/jazzy/setup.bash
-rosdep update && rosdep install --from-paths src --ignore-src -y --skip-keys="gz-transport12 gz-common5 gz-math7 gz-msgs9 gz-gui7 gz-cmake3 gz-sim7 zenohc gz-transport7 gz-plugin2"
+rosdep update && rosdep install --from-paths src --ignore-src -y --skip-keys="gz-transport13 gz-common5 gz-math7 gz-msgs10 gz-gui7 gz-cmake3 gz-sim8 zenohc gz-transport7 gz-plugin2"
 sudo apt install python3-colcon-common-extensions
 colcon build --event-handlers console_direct+
 ```

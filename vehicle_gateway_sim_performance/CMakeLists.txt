@@ -27,8 +27,8 @@ find_package(gz-cmake3 REQUIRED)
 # Find the Gazebo transport library
 #--------------------------------------
 # Find gz-transport
-gz_find_package(gz-transport12 REQUIRED)
-set(GZ_TRANSPORT_VER ${gz-transport12_VERSION_MAJOR})
+gz_find_package(gz-transport13 REQUIRED)
+set(GZ_TRANSPORT_VER ${gz-transport13_VERSION_MAJOR})
 
 add_executable(system_metric_collector
   src/main.cpp

@@ -8,7 +8,7 @@
   <license>Apache License 2.0</license>
 
   <depend>gz-cmake3</depend>
-  <depend>gz-transport12</depend>
+  <depend>gz-transport13</depend>
   <depend>pluginlib</depend>
   <depend>rclcpp</depend>
   <depend>vehicle_gateway_px4</depend>

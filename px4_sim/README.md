@@ -5,6 +5,6 @@ simulate quadcopters, VTOLs and fixed wings planes in Gazebo.
 
 # Requirements
 
- - [Gazebo Garden](https://gazebosim.org/docs/garden/install)
+ - [Gazebo Garden](https://gazebosim.org/docs/harmonic/install)
  - [ROS 2 Humble](https://docs.ros.org/en/humble/Installation.html)
  - [ros_gz](https://github.com/gazebosim/ros_gz)
