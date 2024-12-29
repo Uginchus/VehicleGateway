@@ -100,7 +100,8 @@ ament_export_dependencies(
   rclcpp
   vehicle_gateway
 )
-ament_environment_hooks(${ament_cmake_package_templates_ENVIRONMENT_HOOK_LIBRARY_PATH})
+# ament_environment_hooks(${ament_cmake_package_templates_ENVIRONMENT_HOOK_LIBRARY_PATH})
+# ament_environment_hooks(cmake/99_vehicle_gateway_betaflight_setup.sh.in)
 
 ament_export_include_directories(
   include

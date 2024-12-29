@@ -31,6 +31,9 @@ def get_betaflight_dir():
 def get_world_dir():
     return get_package_share_directory('my_robot_bringup')
 
+def get_model_dir():
+    return get_package_share_directory('my_robot_description')
+
 run_virtual_tty = ExecuteProcess(cmd=["socat", "-dd", "pty,link=/tmp/ttyS0,raw,echo=0",
                                       "tcp:127.0.0.1:5761"])
 
@@ -56,8 +59,8 @@ def generate_launch_description():
         default_value=use_sim_time,
         description='If true, use simulated clock')
 
-    os.environ["GZ_SIM_RESOURCE_PATH"] = os.path.join(get_betaflight_dir(), "models")
-    os.environ["GZ_SIM_RESOURCE_PATH"] += ":" + os.path.join(get_betaflight_dir(), "worlds")
+    os.environ["GZ_SIM_RESOURCE_PATH"] = os.path.join(get_model_dir(), "models")
+    os.environ["GZ_SIM_RESOURCE_PATH"] += ":" + os.path.join(get_world_dir(), "worlds")
 
     world_sdf = os.path.join(get_world_dir(), "worlds", "sandbox.sdf")
 

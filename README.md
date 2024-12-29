@@ -1,27 +1,50 @@
 # Install packages
 
+Ros_gz
 ```bash
-colcon build --packages-select ros_gz_interfaces --symlink-install
-colcon build --packages-select ros_gz_bridge --symlink-install
-colcon build --packages-select ros_gz_image --symlink-install
-colcon build --packages-select ros_gz_sim --symlink-install
+colcon build --packages-select ros_gz_interfaces ros_gz_bridge ros_gz_image ros_gz_sim --symlink-install
 ```
 
+Betaflight
 ```bash
-colcon build --packages-select betaflight_configurator --symlink-install
-colcon build --packages-select betaflight_controller --symlink-install
-colcon build --packages-select betaflight_gazebo --symlink-install
-colcon build --packages-select betaflight_sim --symlink-install
+colcon build --packages-select betaflight_configurator betaflight_controller betaflight_gazebo betaflight_sim --symlink-install
 ```
 
+Aerial
 ```bash
 colcon build --packages-select gz_aerial_plugins --symlink-install
 ```
 
+Custom robots
 ```bash
-colcon build --packages-select my_robot_description --symlink-install
-colcon build --packages-select my_robot_bringup --symlink-install
+colcon build --packages-select my_robot_description my_robot_bringup --symlink-install
 ```
+
+```bash
+colcon build --packages-select vehicle_gateway vehicle_gateway_models vehicle_gateway_worlds msp --symlink-install
+colcon build --packages-select vehicle_gateway_betaflight --symlink-install
+colcon build --packages-select betaflight_demo --symlink-install
+```
+
+PX4
+```bash
+colcon build --packages-select qgroundcontrol --symlink-install
+colcon build --packages-select px4_msgs --symlink-install
+colcon build --packages-select micro_ros_msgs --symlink-install
+colcon build --packages-select micro_ros_agent --symlink-install
+
+colcon build --packages-select zenohc --symlink-install
+colcon build --packages-select vehicle_gateway_px4 --symlink-install
+colcon build --packages-select vehicle_gateway_python --symlink-install
+
+colcon build --packages-select vehicle_gateway_python_helpers --symlink-install
+
+colcon build --packages-select px4_sim --symlink-install
+
+
+
+```
+
 
 ```bash
 wget https://developer.arm.com/-/media/Files/downloads/gnu-rm/10.3-2021.10/gcc-arm-none-eabi-10.3-2021.10-x86_64-linux.tar.bz2

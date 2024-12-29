@@ -1,13 +1,62 @@
-# How to run betaflight
+# How to run betaflight [Quick]
 
-Launch 
+## Install packages
+
+- Ros_gz
+```bash
+colcon build --packages-select ros_gz_interfaces ros_gz_bridge ros_gz_image ros_gz_sim --symlink-install
 ```
+
+- Betaflight
+```bash
+colcon build --packages-select betaflight_configurator betaflight_controller betaflight_gazebo betaflight_sim --symlink-install
+```
+
+- Aerial
+```bash
+colcon build --packages-select gz_aerial_plugins --symlink-install
+```
+
+- Custom robots
+```bash
+colcon build --packages-select my_robot_description my_robot_bringup --symlink-install
+```
+
+- Gateway 
+```bash
+colcon build --packages-select vehicle_gateway vehicle_gateway_models vehicle_gateway_worlds msp --symlink-install
+colcon build --packages-select vehicle_gateway_betaflight --symlink-install
+colcon build --packages-select betaflight_demo --symlink-install
+```
+
+## Launching
+
+- Launch sitl
+```bash
 cd ~/vg/install/betaflight_sim/share/betaflight_sim/bin
 ./betaflight_SITL.elf
 ```
 
+- Launch betaflight configurator
+```bash
+cd ~/vg/install/betaflight_configurator/share/betaflight_configurator/bin
+./betaflight-configurator
+```
 
-# Betaflight
+- Launch controller
+```bash
+ros2 run joy joy_node
+ros2 run betaflight_controller betaflight_joy_controller
+```
+
+- Launch simulation
+```bash
+ros2 launch betaflight_sim quadcopter.launch.py
+```
+
+
+
+# How to run betaflight [Long]
 
 The Gazebo support for Betaflight was added in this [PR](https://github.com/betaflight/betaflight/pull/12346).
 It's already available in `master` branch.

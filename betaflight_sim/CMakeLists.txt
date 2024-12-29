@@ -39,7 +39,6 @@ install(DIRECTORY
 )
 
 install(DIRECTORY
-  models
   config
   DESTINATION
     ${CMAKE_INSTALL_PREFIX}/share/betaflight_sim
