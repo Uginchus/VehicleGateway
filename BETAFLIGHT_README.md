@@ -1,45 +1,16 @@
 # How to run betaflight [Quick]
 
-## Install packages
-
-- Ros_gz
-```bash
-colcon build --packages-select ros_gz_interfaces ros_gz_bridge ros_gz_image ros_gz_sim --symlink-install
-```
-
-- Betaflight
-```bash
-colcon build --packages-select betaflight_configurator betaflight_controller betaflight_gazebo betaflight_sim --symlink-install
-```
-
-- Aerial
-```bash
-colcon build --packages-select gz_aerial_plugins --symlink-install
-```
-
-- Custom robots
-```bash
-colcon build --packages-select my_robot_description my_robot_bringup --symlink-install
-```
-
-- Gateway 
-```bash
-colcon build --packages-select vehicle_gateway vehicle_gateway_models vehicle_gateway_worlds msp --symlink-install
-colcon build --packages-select vehicle_gateway_betaflight --symlink-install
-colcon build --packages-select betaflight_demo --symlink-install
-```
-
 ## Launching
 
 - Launch sitl
 ```bash
-cd ~/vg/install/betaflight_sim/share/betaflight_sim/bin
+cd ~/vg/vg_ws/install/share/betaflight_sim/bin
 ./betaflight_SITL.elf
 ```
 
 - Launch betaflight configurator
 ```bash
-cd ~/vg/install/betaflight_configurator/share/betaflight_configurator/bin
+cd ~/vg/vg_ws/install/share/betaflight_configurator/bin
 ./betaflight-configurator
 ```
 
@@ -79,7 +50,7 @@ It's already available in `master` branch.
     4. Once you have verified that the changes have been committed you will need to copy the configuration file `eeprom.bin` that has been generated from `~/vg/install/betaflight_sim/share/betaflight_sim/bin/eeprom.bin` to `~/vg/install/betaflight_sim/share/betaflight_sim/config/eeprom.bin`:
 
         ```bash
-        cp ~/vg/install/betaflight_sim/share/betaflight_sim/bin/eeprom.bin ~/vg/install/betaflight_sim/share/betaflight_sim/config/eeprom.bin
+        cp ~/vg/vg_ws/install/share/betaflight_sim/bin/eeprom.bin ~/vg/vg_ws/install/share/betaflight_sim/config/eeprom.bin
         ```
 
  - **betaflight_controller**: When the drone is connected to SITL this requires an RC, otherwise

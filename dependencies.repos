@@ -1,5 +1,4 @@
-repositories:
-  ros_gz:
+msp:
     type: git
-    url: https://github.com/gazebosim/ros_gz
-    version: jazzy
+    url: https://github.com/christianrauch/msp
+    version: master
