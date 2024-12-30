@@ -1,8 +1,8 @@
 # Install packages
 
-PX4
+PX4 [TODO]
 ```bash
-colcon build --packages-select qgroundcontrol --symlink-install
+colcon build --packages-select qgroundcontrol --symlink-install --merge-install
 colcon build --packages-select px4_msgs --symlink-install
 colcon build --packages-select micro_ros_msgs --symlink-install
 colcon build --packages-select micro_ros_agent --symlink-install
