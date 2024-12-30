@@ -28,6 +28,11 @@ import time
 def get_betaflight_dir():
     return get_package_share_directory('betaflight_sim')
 
+def get_world_dir():
+    return get_package_share_directory('my_robot_bringup')
+
+def get_model_dir():
+    return get_package_share_directory('my_robot_description')
 
 run_betaflight_controller = Node(
     package='betaflight_controller',
@@ -73,10 +78,10 @@ def generate_launch_description():
         default_value=use_sim_time,
         description='If true, use simulated clock')
 
-    os.environ["GZ_SIM_RESOURCE_PATH"] = os.path.join(get_betaflight_dir(), "models")
-    os.environ["GZ_SIM_RESOURCE_PATH"] += ":" + os.path.join(get_betaflight_dir(), "worlds")
+    os.environ["GZ_SIM_RESOURCE_PATH"] = os.path.join(get_model_dir(), "models")
+    os.environ["GZ_SIM_RESOURCE_PATH"] += ":" + os.path.join(get_world_dir(), "worlds")
 
-    world_sdf = os.path.join(get_betaflight_dir(), "worlds", "empty_betaflight_world.sdf")
+    world_sdf = os.path.join(get_world_dir(), "worlds", "sandbox.sdf")
 
     use_groundcontrol = DeclareLaunchArgument('groundcontrol', default_value='false',
                                               choices=['true', 'false'],

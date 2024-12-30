@@ -98,3 +98,8 @@ colcon build --merge-install --symlink-install
 sudo apt-get update
 sudo apt-get install socat -y
 ```
+
+Additional
+```
+pip install pyserial
+```
